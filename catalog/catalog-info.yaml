@@ -1,0 +1,24 @@
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: surfers-fastappi-accelerator
+  namespace: alpha
+  description: Surfers System Accelerator for creating REST API Gateways
+  tags:
+    - app-accelerator
+    - python
+    - web
+    - tanzu
+  annotations:
+    backstage.io/kubernetes-label-selector: 'app.kubernetes.io/part-of=surferslookout'
+    backstage.io/techdocs-ref: dir:.
+spec:
+  type: service
+  lifecycle: experimental
+  owner: group:surfers-crew
+  system: surfers-system
+  providesApis:
+    - alpha/surfers-fastappi-accelerator-tap1.tanzu.rocks # need to replace with the correct context for the deployment
+    # - <namespace>/<name>-<tap root dns> is the syntax

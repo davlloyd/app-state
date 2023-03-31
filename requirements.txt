@@ -1,0 +1,13 @@
+pyservicebinding
+sqlalchemy
+pysqlite3
+python-dotenv
+feedparser
+pytest
+fastapi
+uvicorn
+pydantic
+lru_cache
+celery
+requests
+httpx

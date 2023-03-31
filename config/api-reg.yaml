@@ -1,0 +1,18 @@
+apiVersion: apis.apps.tanzu.vmware.com/v1alpha1
+kind: APIDescriptor
+metadata:
+  name: app-state-descripter
+spec:
+  description: "Surfers system Rest API service"
+  location:
+    baseURL:
+      ref:
+        apiVersion: serving.knative.dev/v1
+        kind: Service
+        name: app-state
+    path: "/api/v1/tech-docs"
+  owner: group:surfers-crew
+  system: surfers-system
+  type: openapi
+
+      
