@@ -11,3 +11,4 @@ lru_cache
 celery
 requests
 httpx
+kubernetes

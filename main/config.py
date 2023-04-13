@@ -13,7 +13,9 @@ class BaseConfig:
     USER_PORT: int = os.environ.get('USER_PORT', 8080)
     BASE_DIR: pathlib.Path = pathlib.Path(__file__).parent.parent
     CELERY_BROKER_URL: str = os.environ.get("CELERY_BROKER_URL", "redis://127.0.0.1:6379/0")            # NEW
-    CELERY_RESULT_BACKEND: str = os.environ.get("CELERY_RESULT_BACKEND", "redis://127.0.0.1:6379/0") 
+    CELERY_RESULT_BACKEND: str = os.environ.get("CELERY_RESULT_BACKEND", "redis://127.0.0.1:6379/0")
+    K8S_HOST_URL: str = os.environ.get("K8S_API_URL", "http://localhost")
+    K8S_API_KEY: str = os.environ.get("K8S_API_KEY")
 
 
 class ProductionConfig(BaseConfig):

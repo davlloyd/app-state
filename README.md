@@ -1,5 +1,5 @@
-# Surfers-FastAPI-Accelerator
-REST API scaffolding written in Python with the FastAPI micro framework for for futher project modules delivering REST APIs aligned to the Surfers Lookout system. 
+# App_state
+API providing metrics
 
 # Overview
 Single API Model with a single object that can be set and retrieved
