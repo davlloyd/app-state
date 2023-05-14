@@ -45,6 +45,8 @@ def getMetrics():
 def getPods():
     logger.info('Get list of pods running in cluster')
 
+    getAPIClient()
+
     v1 = client.CoreV1Api()
     ret = v1.list_pod_for_all_namespaces(watch=False)
 
@@ -85,6 +87,7 @@ def getPods():
 def getWorkloads():
     logger.info('Get list of cartographer workloads deployed in cluster')
 
+    getAPIClient()
     _return = []
     with client.ApiClient() as api_client:
         api_instance = client.CustomObjectsApi(api_client)
@@ -142,6 +145,7 @@ def getWorkloads():
 def getSupplyChains():
     logger.info('Get list of cartographer Supply Chains deployed in cluster')
 
+    getAPIClient()
     _return = []
     with client.ApiClient() as api_client:
         api_instance = client.CustomObjectsApi(api_client)

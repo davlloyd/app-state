@@ -20,7 +20,39 @@ class Parameter(BaseModel):
     value: Optional[str]
     default: Optional[str]
 
-class Platform(BaseModel):
+class Pod(BaseModel):
+    id: str
+    name: str
+    creationDate: float
+    address: str
+    labels: Optional[dict]
+    annotations: Optional[dict]
+    parameters: Optional[list[Parameter]]
+    type: str
+    status: str
+    namespace: str
+    date: float    
+    
+    class Config:
+        orm_mode = True
+
+class Workload(BaseModel):
+    id: str
+    name: str
+    creationDate: float
+    address: str
+    labels: Optional[dict]
+    annotations: Optional[dict]
+    parameters: Optional[list[Parameter]]
+    type: str
+    status: str
+    namespace: str
+    date: float    
+    
+    class Config:
+        orm_mode = True
+
+class SupplyChain(BaseModel):
     id: str
     name: str
     creationDate: float
@@ -66,12 +98,12 @@ async def health():
 
 # Status query page, can also be used for the benchmark testing 
 @router.get(
-    '/platform', 
-    response_model=list[Platform],
+    '/pods', 
+    response_model=list[Pod],
     responses={
         404: {"model": Message, "description": "The item was not found"},
         200: {
-            "description": "Platform metric set",
+            "description": "Pod metric set",
             "content": {
                 "application/json": {
                     "example": {'id': '1234','name': 'tap-1', 'labels': 'class=foo', 'type': 'pod', 'status': 'running', 'message': 'things', 'date': '20231212'}
@@ -79,8 +111,49 @@ async def health():
             },
         },
     },
-    tags=["general"])
-async def platform():
-    _resp = k8s.getMetrics()
+    tags=["general","pod"])
+async def pods():
+    _resp = k8s.getPods()
     return _resp
 
+
+# Status query page, can also be used for the benchmark testing 
+@router.get(
+    '/workloads', 
+    response_model=list[Workload],
+    responses={
+        404: {"model": Message, "description": "The item was not found"},
+        200: {
+            "description": "Workload metric set",
+            "content": {
+                "application/json": {
+                    "example": {'id': '1234','name': 'tap-1', 'labels': 'class=foo', 'type': 'workload', 'status': 'running', 'message': 'things', 'date': '20231212'}
+                }
+            },
+        },
+    },
+    tags=["general","workload"])
+async def workloads():
+    _resp = k8s.getWorkloads()
+    return _resp
+
+
+# Status query page, can also be used for the benchmark testing 
+@router.get(
+    '/supplychains', 
+    response_model=list[SupplyChain],
+    responses={
+        404: {"model": Message, "description": "The item was not found"},
+        200: {
+            "description": "SupplyChain metric set",
+            "content": {
+                "application/json": {
+                    "example": {'id': '1234','name': 'tap-1', 'labels': 'class=foo', 'type': 'supplychain', 'status': 'running', 'message': 'things', 'date': '20231212'}
+                }
+            },
+        },
+    },
+    tags=["general","supplychain"])
+async def supplychains():
+    _resp = k8s.getSupplyChains()
+    return _resp
